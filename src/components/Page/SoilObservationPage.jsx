@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function SoilObservationPage() {
   return (
@@ -8,42 +15,17 @@ function SoilObservationPage() {
         {/* Toprak Nem Gözlemi */}
         <label className="block mb-2">Toprak Nem Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakNem"
-              value="kuru"
-              className="mr-2"
-            />
-            Kuru
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakNem"
-              value="nemli"
-              className="mr-2"
-            />
-            Nemli
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakNem"
-              value="cokNemli"
-              className="mr-2"
-            />
-            Çok Nemli
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakNem"
-              value="balçık"
-              className="mr-2"
-            />
-            Balçık
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Toprak Nem Durumunu Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="kuru">Kuru</SelectItem>
+              <SelectItem value="nemli">Nemli</SelectItem>
+              <SelectItem value="cokNemli">Çok Nemli</SelectItem>
+              <SelectItem value="balcik">Balçık</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Toprak Nem İçeriği (Volümetrik Su İçeriği) */}
@@ -55,124 +37,49 @@ function SoilObservationPage() {
         {/* Toprak Göbre Kirlilik Gözlemi */}
         <label className="block mb-2">Toprak Göbre Kirlilik Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakGobreKirlilik"
-              value="yok"
-              className="mr-2"
-            />
-            Yok
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakGobreKirlilik"
-              value="az"
-              className="mr-2"
-            />
-            Az
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakGobreKirlilik"
-              value="orta"
-              className="mr-2"
-            />
-            Orta
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakGobreKirlilik"
-              value="cok"
-              className="mr-2"
-            />
-            Çok
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Toprak Göbre Kirlilik Durumunu Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="yok">Yok</SelectItem>
+              <SelectItem value="az">Az</SelectItem>
+              <SelectItem value="orta">Orta</SelectItem>
+              <SelectItem value="cok">Çok</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Toprak Sıcaklık Gözlemi */}
         <label className="block mb-2">Toprak Sıcaklık Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSicaklik"
-              value="0to6"
-              className="mr-2"
-            />
-            0-6 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSicaklik"
-              value="6to10"
-              className="mr-2"
-            />
-            6-10 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSicaklik"
-              value="10to15"
-              className="mr-2"
-            />
-            10-15 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSicaklik"
-              value="15to20"
-              className="mr-2"
-            />
-            15-20 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSicaklik"
-              value="20veUzeri"
-              className="mr-2"
-            />
-            20 °C ve üzeri
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Toprak Sıcaklık Durumunu Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="0to6">0-6 °C</SelectItem>
+              <SelectItem value="6to10">6-10 °C</SelectItem>
+              <SelectItem value="10to15">10-15 °C</SelectItem>
+              <SelectItem value="15to20">15-20 °C</SelectItem>
+              <SelectItem value="20veUzeri">20 °C ve üzeri</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Toprak Su Doygunluk Gözlemi */}
         <label className="block mb-2">Toprak Su Doygunluk Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSuDoygunluk"
-              value="doymamış"
-              className="mr-2"
-            />
-            Doymamış
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSuDoygunluk"
-              value="doymuş"
-              className="mr-2"
-            />
-            Doymuş
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="toprakSuDoygunluk"
-              value="aşırıDoymuş"
-              className="mr-2"
-            />
-            Aşırı Doymuş
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Toprak Su Doygunluk Durumunu Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="doymamis">Doymamış</SelectItem>
+              <SelectItem value="doymus">Doymuş</SelectItem>
+              <SelectItem value="asiriDoymus">Aşırı Doymuş</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Submit Button */}

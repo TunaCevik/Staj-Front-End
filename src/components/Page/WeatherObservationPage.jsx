@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 function WeatherObservationPage() {
   return (
@@ -12,247 +20,80 @@ function WeatherObservationPage() {
         {/* Hava Durumu */}
         <label className="block mb-2">Hava Durumu:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="acik"
-              className="mr-2"
-            />
-            Açık
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="parcaliBulutlu"
-              className="mr-2"
-            />
-            Parçalı Bulutlu
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="bulutlu"
-              className="mr-2"
-            />
-            Bulutlu
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="yagisli"
-              className="mr-2"
-            />
-            Yağışlı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="karlı"
-              className="mr-2"
-            />
-            Karlı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="firtinali"
-              className="mr-2"
-            />
-            Fırtınalı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="sisli"
-              className="mr-2"
-            />
-            Sisli
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="havaDurumu"
-              value="dolu"
-              className="mr-2"
-            />
-            Dolu
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Hava Durumunu Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="acik">Açık</SelectItem>
+              <SelectItem value="parcaliBulutlu">Parçalı Bulutlu</SelectItem>
+              <SelectItem value="bulutlu">Bulutlu</SelectItem>
+              <SelectItem value="yagisli">Yağışlı</SelectItem>
+              <SelectItem value="karli">Karlı</SelectItem>
+              <SelectItem value="firtinali">Fırtınalı</SelectItem>
+              <SelectItem value="sisli">Sisli</SelectItem>
+              <SelectItem value="dolu">Dolu</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Rüzgar Türü */}
         <label className="block mb-2">Rüzgar Türü:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="karayel"
-              className="mr-2"
-            />
-            Karayel
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="poyraz"
-              className="mr-2"
-            />
-            Poyraz
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="lodos"
-              className="mr-2"
-            />
-            Lodos
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="kuzeyRuzgari"
-              className="mr-2"
-            />
-            Kuzey Rüzgarı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="guneyRuzgari"
-              className="mr-2"
-            />
-            Güney Rüzgarı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="batıRuzgari"
-              className="mr-2"
-            />
-            Batı Rüzgarı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="ruzgarTuru"
-              value="doguRuzgari"
-              className="mr-2"
-            />
-            Doğu Rüzgarı
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Rüzgar Türünü Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="karayel">Karayel</SelectItem>
+              <SelectItem value="poyraz">Poyraz</SelectItem>
+              <SelectItem value="lodos">Lodos</SelectItem>
+              <SelectItem value="kuzeyRuzgari">Kuzey Rüzgarı</SelectItem>
+              <SelectItem value="guneyRuzgari">Güney Rüzgarı</SelectItem>
+              <SelectItem value="batiRuzgari">Batı Rüzgarı</SelectItem>
+              <SelectItem value="doguRuzgari">Doğu Rüzgarı</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Rüzgar Hızı Gözlemi */}
         <label className="block mb-2">Rüzgar Hızı Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="radio"
-              name="ruzgarHizi"
-              value="8ms"
-              className="mr-2"
-            />
-            8 m/s
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="ruzgarHizi"
-              value="8to10ms"
-              className="mr-2"
-            />
-            8-10 m/s
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="ruzgarHizi"
-              value="10to15ms"
-              className="mr-2"
-            />
-            10-15 m/s
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="ruzgarHizi"
-              value="15to20ms"
-              className="mr-2"
-            />
-            15-20 m/s
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="ruzgarHizi"
-              value="20msveUzeri"
-              className="mr-2"
-            />
-            20 m/s ve üzeri
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Rüzgar Hızını Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="8ms">8 m/s</SelectItem>
+              <SelectItem value="8to10ms">8-10 m/s</SelectItem>
+              <SelectItem value="10to15ms">10-15 m/s</SelectItem>
+              <SelectItem value="15to20ms">15-20 m/s</SelectItem>
+              <SelectItem value="20msveUzeri">20 m/s ve üzeri</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Hava Sıcaklık Gözlemi */}
         <label className="block mb-2">Hava Sıcaklık Gözlemi:</label>
         <div className="mb-4">
-          <label className="block">
-            <input type="radio" name="sicaklik" value="0to6" className="mr-2" />
-            0-6 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="sicaklik"
-              value="6to10"
-              className="mr-2"
-            />
-            6-10 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="sicaklik"
-              value="10to15"
-              className="mr-2"
-            />
-            10-15 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="sicaklik"
-              value="15to20"
-              className="mr-2"
-            />
-            15-20 °C
-          </label>
-          <label className="block">
-            <input
-              type="radio"
-              name="sicaklik"
-              value="20veUzeri"
-              className="mr-2"
-            />
-            20 °C ve üzeri
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Sıcaklığı Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="0to6">0-6 °C</SelectItem>
+              <SelectItem value="6to10">6-10 °C</SelectItem>
+              <SelectItem value="10to15">10-15 °C</SelectItem>
+              <SelectItem value="15to20">15-20 °C</SelectItem>
+              <SelectItem value="20veUzeri">20 °C ve üzeri</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <Button type="submit" variant="default">
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );

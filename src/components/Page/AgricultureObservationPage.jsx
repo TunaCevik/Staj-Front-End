@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // Shadcn UI Select importları
 
 function AgricultureObservationPage() {
   return (
@@ -20,96 +27,31 @@ function AgricultureObservationPage() {
         {/* Fenolojik Evre */}
         <label className="block mb-2">Fenolojik Evre:</label>
         <div className="mb-4">
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="kışGözleri"
-              className="mr-2"
-            />
-            Kış Gözleri Uyanıyor Başlangıç
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="yeşilNokta"
-              className="mr-2"
-            />
-            Yeşil Noktalar Belirginleşti
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="yaprak"
-              className="mr-2"
-            />
-            Yaprak Yarıp Uçları İki İle Göründü
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="çiçekTomurcuğu"
-              className="mr-2"
-            />
-            Çiçek Tomurcukları Belirginleşti
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="çiçeklenme"
-              className="mr-2"
-            />
-            Çiçeklenme Tamamlandı
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="tamÇiçek"
-              className="mr-2"
-            />
-            Tam Çiçek
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="taneTutumu"
-              className="mr-2"
-            />
-            Tane Tutumu
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="benDüşme"
-              className="mr-2"
-            />
-            Ben Düşme
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="hasat"
-              className="mr-2"
-            />
-            Hasat
-          </label>
-          <label className="block">
-            <input
-              type="checkbox"
-              name="fenolojikEvre"
-              value="yaprakDökülme"
-              className="mr-2"
-            />
-            Yaprak Dökülme
-          </label>
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Fenolojik Evre Seçiniz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="kisGozleri">
+                Kış Gözleri Uyanıyor Başlangıç
+              </SelectItem>
+              <SelectItem value="yesilNokta">
+                Yeşil Noktalar Belirginleşti
+              </SelectItem>
+              <SelectItem value="yaprak">
+                Yaprak Yarıp Uçları İki İle Göründü
+              </SelectItem>
+              <SelectItem value="cicekTomurcugu">
+                Çiçek Tomurcukları Belirginleşti
+              </SelectItem>
+              <SelectItem value="ciceklenme">Çiçeklenme Tamamlandı</SelectItem>
+              <SelectItem value="tamCicek">Tam Çiçek</SelectItem>
+              <SelectItem value="taneTutumu">Tane Tutumu</SelectItem>
+              <SelectItem value="benDusme">Ben Düşme</SelectItem>
+              <SelectItem value="hasat">Hasat</SelectItem>
+              <SelectItem value="yaprakDokulme">Yaprak Dökülme</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Submit Button */}
