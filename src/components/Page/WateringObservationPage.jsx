@@ -10,10 +10,26 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 function WateringObservationPage() {
-  const [waterGiven, setWaterGiven] = useState(null); // State for 'Bitkiye Su Verildi mi?'
-  const [fertigationDone, setFertigationDone] = useState(null); // State for 'Fertigasyon Yapıldı mı?'
+  // State to hold form data
+  const [formData, setFormData] = useState({
+    waterGiven: null,
+    waterGivenDate: "",
+    fertigationDone: null,
+    fertigationDate: "",
+    fertilizerUsed: "",
+    fertilizerAmount: "",
+  });
 
-  const renderWateringQuestion = (question, answer, setAnswer, dateLabel) => (
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleCheckboxChange = (field, value) => {
+    setFormData((prevData) => ({ ...prevData, [field]: value }));
+  };
+
+  const renderWateringQuestion = (question, answer, dateLabel) => (
     <AccordionItem value={question}>
       <AccordionTrigger>{question}</AccordionTrigger>
       <AccordionContent>
@@ -22,22 +38,27 @@ function WateringObservationPage() {
             <Checkbox
               id={`${question}-yes`}
               checked={answer === true}
-              onCheckedChange={(checked) => setAnswer(checked ? true : null)}
+              onCheckedChange={() => handleCheckboxChange("waterGiven", true)}
             />
             <Label htmlFor={`${question}-yes`}>Evet</Label>
           </div>
           {answer === true && (
             <div className="space-y-2">
               <Label htmlFor={`${question}-date`}>{dateLabel}</Label>
-              <Input type="date" id={`${question}-date`} />
+              <Input
+                type="date"
+                id={`${question}-date`}
+                name="waterGivenDate"
+                value={formData.waterGivenDate}
+                onChange={handleInputChange}
+              />
             </div>
           )}
           <div className="flex items-center space-x-2">
             <Checkbox
               id={`${question}-no`}
               checked={answer === false}
-              onCheckedChange={(checked) => setAnswer(checked ? false : null)}
-              disabled={answer === true}
+              onCheckedChange={() => handleCheckboxChange("waterGiven", false)}
             />
             <Label htmlFor={`${question}-no`}>Hayır</Label>
           </div>
@@ -49,7 +70,6 @@ function WateringObservationPage() {
   const renderFertigationQuestion = (
     question,
     answer,
-    setAnswer,
     dateLabel,
     fertilizerLabel,
     amountLabel
@@ -62,7 +82,9 @@ function WateringObservationPage() {
             <Checkbox
               id={`${question}-yes`}
               checked={answer === true}
-              onCheckedChange={(checked) => setAnswer(checked ? true : null)}
+              onCheckedChange={() =>
+                handleCheckboxChange("fertigationDone", true)
+              }
             />
             <Label htmlFor={`${question}-yes`}>Evet</Label>
           </div>
@@ -70,7 +92,13 @@ function WateringObservationPage() {
             <>
               <div className="space-y-2">
                 <Label htmlFor={`${question}-date`}>{dateLabel}</Label>
-                <Input type="date" id={`${question}-date`} />
+                <Input
+                  type="date"
+                  id={`${question}-date`}
+                  name="fertigationDate"
+                  value={formData.fertigationDate}
+                  onChange={handleInputChange}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor={`${question}-fertilizer`}>
@@ -79,6 +107,9 @@ function WateringObservationPage() {
                 <Input
                   type="text"
                   id={`${question}-fertilizer`}
+                  name="fertilizerUsed"
+                  value={formData.fertilizerUsed}
+                  onChange={handleInputChange}
                   placeholder="Kullanılan Gübre/Besleyici Giriniz"
                 />
               </div>
@@ -87,6 +118,9 @@ function WateringObservationPage() {
                 <Input
                   type="text"
                   id={`${question}-amount`}
+                  name="fertilizerAmount"
+                  value={formData.fertilizerAmount}
+                  onChange={handleInputChange}
                   placeholder="Kullanılan gübre miktarı ve birim giriniz"
                 />
               </div>
@@ -96,8 +130,9 @@ function WateringObservationPage() {
             <Checkbox
               id={`${question}-no`}
               checked={answer === false}
-              onCheckedChange={(checked) => setAnswer(checked ? false : null)}
-              disabled={answer === true}
+              onCheckedChange={() =>
+                handleCheckboxChange("fertigationDone", false)
+              }
             />
             <Label htmlFor={`${question}-no`}>Hayır</Label>
           </div>
@@ -116,15 +151,13 @@ function WateringObservationPage() {
           {/* Bitkiye Su Verildi mi? */}
           {renderWateringQuestion(
             "Bitkiye Su Verildi mi?",
-            waterGiven,
-            setWaterGiven,
+            formData.waterGiven,
             "Tarih Giriniz"
           )}
           {/* Fertigasyon Yapıldı mı? */}
           {renderFertigationQuestion(
             "Fertigasyon Yapıldı mı?",
-            fertigationDone,
-            setFertigationDone,
+            formData.fertigationDone,
             "Tarih Giriniz",
             "Kullanılan Gübre/Besleyici Giriniz",
             "Kullanılan Gübre Miktarı ve Birim Giriniz"

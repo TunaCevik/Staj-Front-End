@@ -18,14 +18,18 @@ import {
 } from "@/components/ui/select";
 
 function PlantObservationPage() {
-  // State for 'Bağda Meyve Var mı?'
-  const [fruitAnswer, setFruitAnswer] = useState(null);
-
-  // State for 'Besin Elementi Eksikliği'
-  const [nutrientDeficiency, setNutrientDeficiency] = useState(null);
-
-  // State for diseases
-  const [selectedDiseases, setSelectedDiseases] = useState([]);
+  // State to hold form data
+  const [formData, setFormData] = useState({
+    shootLength: "",
+    bunchLength: "",
+    fruitAnswer: null,
+    bunchCount: "",
+    thousandGrainWeight: "",
+    nutrientDeficiency: null,
+    deficientElement: "",
+    selectedDiseases: [],
+    homogeneousDevelopment: "",
+  });
 
   const diseases = [
     { id: "hastalik-yok", label: "Hastalık yok" },
@@ -38,29 +42,29 @@ function PlantObservationPage() {
     { id: "bag-sirke-sinegi", label: "Bağ Sirke Sineği" },
   ];
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   const handleDiseaseChange = (diseaseId) => {
-    setSelectedDiseases((prev) => {
-      if (diseaseId === "no-disease") {
-        if (prev.includes("no-disease")) {
-          return [];
-        } else {
-          return ["no-disease"];
-        }
-      } else {
-        const newSelection = prev.includes(diseaseId)
-          ? prev.filter((id) => id !== diseaseId)
-          : [...prev.filter((id) => id !== "no-disease"), diseaseId];
-        return newSelection;
-      }
+    setFormData((prevData) => {
+      const isSelected = prevData.selectedDiseases.includes(diseaseId);
+      const selectedDiseases = isSelected
+        ? prevData.selectedDiseases.filter((id) => id !== diseaseId)
+        : [...prevData.selectedDiseases, diseaseId];
+
+      return { ...prevData, selectedDiseases };
     });
   };
 
   const renderQuestion = (
     question,
     answer,
-    setAnswer,
     integerLabel1,
-    integerLabel2
+    integerName1,
+    integerLabel2,
+    integerName2
   ) => (
     <AccordionItem value={question}>
       <AccordionTrigger>{question}</AccordionTrigger>
@@ -69,26 +73,26 @@ function PlantObservationPage() {
           <div className="flex items-center space-x-2">
             <Checkbox
               id={`${question}-yes`}
-              checked={answer === true}
-              onCheckedChange={(checked) => setAnswer(checked ? true : null)}
+              checked={answer === "yes"}
+              onCheckedChange={() =>
+                setFormData((prevData) => ({ ...prevData, fruitAnswer: "yes" }))
+              }
             />
             <Label htmlFor={`${question}-yes`}>Evet</Label>
           </div>
-          {answer === true && (
+          {answer === "yes" && (
             <>
               <div className="space-y-2">
                 <Label htmlFor={`${question}-integer-1`}>{integerLabel1}</Label>
                 <Input
                   type="number"
                   id={`${question}-integer-1`}
+                  name={integerName1}
+                  value={formData[integerName1]}
+                  onChange={handleInputChange}
                   placeholder="Salkımdaki tane sayısını giriniz"
                   step="1"
                   min="0"
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
                 />
               </div>
               <div className="space-y-2">
@@ -96,14 +100,12 @@ function PlantObservationPage() {
                 <Input
                   type="number"
                   id={`${question}-integer-2`}
+                  name={integerName2}
+                  value={formData[integerName2]}
+                  onChange={handleInputChange}
                   placeholder="Bin tane ağırlığını giriniz"
                   step="0.01"
                   min="0"
-                  onKeyPress={(e) => {
-                    if (!/[0-9.]/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
                 />
               </div>
             </>
@@ -111,9 +113,10 @@ function PlantObservationPage() {
           <div className="flex items-center space-x-2">
             <Checkbox
               id={`${question}-no`}
-              checked={answer === false}
-              onCheckedChange={(checked) => setAnswer(checked ? false : null)}
-              disabled={answer === true}
+              checked={answer === "no"}
+              onCheckedChange={() =>
+                setFormData((prevData) => ({ ...prevData, fruitAnswer: "no" }))
+              }
             />
             <Label htmlFor={`${question}-no`}>Hayır</Label>
           </div>
@@ -125,8 +128,8 @@ function PlantObservationPage() {
   const renderNutrientDeficiencyQuestion = (
     question,
     answer,
-    setAnswer,
-    inputLabel
+    inputLabel,
+    inputName
   ) => (
     <AccordionItem value={question}>
       <AccordionTrigger>{question}</AccordionTrigger>
@@ -135,17 +138,25 @@ function PlantObservationPage() {
           <div className="flex items-center space-x-2">
             <Checkbox
               id={`${question}-yes`}
-              checked={answer === true}
-              onCheckedChange={(checked) => setAnswer(checked ? true : null)}
+              checked={answer === "yes"}
+              onCheckedChange={() =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  nutrientDeficiency: "yes",
+                }))
+              }
             />
             <Label htmlFor={`${question}-yes`}>Evet</Label>
           </div>
-          {answer === true && (
+          {answer === "yes" && (
             <div className="space-y-2">
               <Label htmlFor={`${question}-input`}>{inputLabel}</Label>
               <Input
                 type="text"
                 id={`${question}-input`}
+                name={inputName}
+                value={formData[inputName]}
+                onChange={handleInputChange}
                 placeholder="Eksik Besin Elementini Giriniz"
               />
             </div>
@@ -153,9 +164,13 @@ function PlantObservationPage() {
           <div className="flex items-center space-x-2">
             <Checkbox
               id={`${question}-no`}
-              checked={answer === false}
-              onCheckedChange={(checked) => setAnswer(checked ? false : null)}
-              disabled={answer === true}
+              checked={answer === "no"}
+              onCheckedChange={() =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  nutrientDeficiency: "no",
+                }))
+              }
             />
             <Label htmlFor={`${question}-no`}>Hayır</Label>
           </div>
@@ -170,24 +185,38 @@ function PlantObservationPage() {
       <form className="flex flex-col items-start">
         {/* Sürgün Boyu */}
         <label className="block mb-2">Sürgün Boyu (Cm):</label>
-        <input type="number" className="w-full p-2 mb-4 border rounded" />
+        <Input
+          type="number"
+          name="shootLength"
+          value={formData.shootLength}
+          onChange={handleInputChange}
+          className="w-full p-2 mb-4 border rounded"
+        />
 
         {/* Salkım Uzunluğu */}
         <label className="block mb-2">Salkım Uzunluğu (Cm):</label>
-        <input type="number" className="w-full p-2 mb-4 border rounded" />
+        <Input
+          type="number"
+          name="bunchLength"
+          value={formData.bunchLength}
+          onChange={handleInputChange}
+          className="w-full p-2 mb-4 border rounded"
+        />
+
         <Accordion type="single" collapsible className="w-full mb-6">
           {renderQuestion(
             "Bağda Meyve Var mı?",
-            fruitAnswer,
-            setFruitAnswer,
+            formData.fruitAnswer,
             "Salkımdaki Ortalama Tane sayısını giriniz.",
-            "Bin Tane Ağırlığını Giriniz."
+            "bunchCount",
+            "Bin Tane Ağırlığını Giriniz.",
+            "thousandGrainWeight"
           )}
           {renderNutrientDeficiencyQuestion(
             "Besin Elementi Eksikliği",
-            nutrientDeficiency,
-            setNutrientDeficiency,
-            "Eksik Besin Elementini Giriniz."
+            formData.nutrientDeficiency,
+            "Eksik Besin Elementini Giriniz.",
+            "deficientElement"
           )}
         </Accordion>
 
@@ -208,11 +237,11 @@ function PlantObservationPage() {
                     >
                       <Checkbox
                         id={disease.id}
-                        checked={selectedDiseases.includes(disease.id)}
+                        checked={formData.selectedDiseases.includes(disease.id)}
                         onCheckedChange={() => handleDiseaseChange(disease.id)}
                         disabled={
                           disease.id !== "no-disease" &&
-                          selectedDiseases.includes("no-disease")
+                          formData.selectedDiseases.includes("no-disease")
                         }
                       />
                       <Label htmlFor={disease.id}>{disease.label}</Label>
@@ -230,7 +259,15 @@ function PlantObservationPage() {
             Homojen Gelişme Var mı?
           </label>
           <div className="mb-4 w-full">
-            <Select>
+            <Select
+              value={formData.homogeneousDevelopment}
+              onValueChange={(value) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  homogeneousDevelopment: value,
+                }))
+              }
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Homojen Gelişme Durumunu Seçiniz" />
               </SelectTrigger>
