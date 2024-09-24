@@ -20,6 +20,7 @@ import {
 function PlantObservationPage() {
   // State to hold form data
   const [formData, setFormData] = useState({
+    sampleId: "",
     shootLength: "",
     bunchLength: "",
     fruitAnswer: null,
@@ -186,6 +187,16 @@ function PlantObservationPage() {
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-6">Bitki Gözlemi</h2>
       <form className="flex flex-col items-start" onSubmit={handleSubmit}>
+        <label htmlFor="sampleId" className="block mb-2">
+          Sample Id:
+        </label>
+        <input
+          type="number"
+          name="sampleId"
+          className="w-full p-2 mb-4 border rounded"
+          id="sampleId"
+          onChange={handleInputChange}
+        />
         {/* Sürgün Boyu */}
         <label className="block mb-2">Sürgün Boyu (Cm):</label>
         <Input

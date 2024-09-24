@@ -9,6 +9,7 @@ import {
 
 function WeatherObservationPage() {
   const [formData, setFormData] = useState({
+    sampleId: "",
     gunSayisi: "",
     havaDurumu: "",
     ruzgarTuru: "",
@@ -34,6 +35,17 @@ function WeatherObservationPage() {
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Hava Gözlemi</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="sampleId" className="block mb-2">
+          Sample Id:
+        </label>
+        <input
+          type="number"
+          name="sampleId"
+          className="w-full p-2 mb-4 border rounded"
+          id="sampleId"
+          onChange={handleInputChange}
+        />
+
         {/* Gözlem için gün sayısı */}
         <label className="block mb-2">Gözlem için gün sayısı:</label>
         <input

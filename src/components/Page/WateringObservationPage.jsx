@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 function WateringObservationPage() {
   // State to hold form data
   const [formData, setFormData] = useState({
+    sampleId: "",
     waterGiven: null,
     waterGivenDate: "",
     fertigationDone: null,
@@ -152,6 +153,16 @@ function WateringObservationPage() {
         Sulama ve Bitki Besleme Gözlemi
       </h2>
       <form className="flex flex-col items-start" onSubmit={handleSubmit}>
+        <label htmlFor="sampleId" className="block mb-2">
+          Sample Id:
+        </label>
+        <input
+          type="number"
+          name="sampleId"
+          className="w-full p-2 mb-4 border rounded"
+          id="sampleId"
+          onChange={handleInputChange}
+        />
         <Accordion type="single" collapsible className="w-full mb-4">
           {/* Bitkiye Su Verildi mi? */}
           {renderWateringQuestion(

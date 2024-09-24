@@ -9,6 +9,7 @@ import {
 
 function SoilObservationPage() {
   const [values, setValues] = useState({
+    sampleId: "",
     toprakNem: "",
     toprakNemIcerigi: "",
     gobreKirlilik: "",
@@ -34,6 +35,16 @@ function SoilObservationPage() {
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Toprak Gözlemi</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="sampleId" className="block mb-2">
+          Sample Id:
+        </label>
+        <input
+          type="number"
+          name="sampleId"
+          className="w-full p-2 mb-4 border rounded"
+          id="sampleId"
+          onChange={handleChange}
+        />
         {/* Toprak Nem Gözlemi */}
         <label className="block mb-2">Toprak Nem Gözlemi:</label>
         <div className="mb-4">

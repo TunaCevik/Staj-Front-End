@@ -80,14 +80,7 @@ function Headers() {
         </div>
       </div>
 
-      <div className="w-10 bg-gray-600 rounded-full h-4 relative">
-        <div className="bg-green-500 h-4 rounded-full"></div>
-      </div>
-      <img
-        src={ProfilePic}
-        alt="Profile Pic"
-        className="w-[40px] rounded-full"
-      />
+      {/* Sample ID Input alanı */}
     </div>
   );
 }
