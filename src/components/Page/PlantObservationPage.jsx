@@ -185,7 +185,7 @@ function PlantObservationPage() {
   };
   return (
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold mb-6">Bitki Gözlemi</h2>
+      <h2 className="text-lg font-semibold mb-6">Bitki Gözlemi</h2>
       <form className="flex flex-col items-start" onSubmit={handleSubmit}>
         <label htmlFor="sampleId" className="block mb-2">
           Sample Id:

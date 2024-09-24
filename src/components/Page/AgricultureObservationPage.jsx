@@ -31,7 +31,7 @@ function AgricultureObservationPage() {
   };
 
   return (
-    <div className="container bg-white p-5 rounded-lg shadow-lg">
+    <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Tarımsal Savaşım Gözlemi</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="sampleId" className="block mb-2">
