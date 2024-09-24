@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -8,26 +8,74 @@ import {
 } from "@/components/ui/select"; // Shadcn UI Select importları
 
 function AgricultureObservationPage() {
+  const [values, setValues] = useState({
+    ilacAdi: "",
+    tarih: "",
+    dozMiktari: "",
+    fenolojikEvre: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSelectChange = (name, value) => {
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
   return (
-    <div className="form-container bg-white p-5 rounded-lg shadow-lg">
+    <div className="container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Tarımsal Savaşım Gözlemi</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Kullanılan İlaç İsmi */}
-        <label className="block mb-2">Kullanılan İlaç İsmi Giriniz:</label>
-        <input type="text" className="w-full p-2 mb-4 border rounded" />
+        <label className="block mb-2" htmlFor="ilacAdi">
+          Kullanılan İlaç İsmi Giriniz:
+        </label>
+        <input
+          type="text"
+          className="w-full p-2 mb-4 border rounded"
+          name="ilacAdi"
+          onChange={handleChange}
+        />
 
         {/* Tarih */}
-        <label className="block mb-2">Tarih Giriniz:</label>
-        <input type="date" className="w-full p-2 mb-4 border rounded" />
+        <label className="block mb-2" htmlFor="tarih">
+          Tarih Giriniz:
+        </label>
+        <input
+          type="date"
+          className="w-full p-2 mb-4 border rounded"
+          name="tarih"
+          onChange={handleChange}
+        />
 
         {/* Doz Miktarı */}
-        <label className="block mb-2">Kullanılan Doz Miktarını Giriniz:</label>
-        <input type="text" className="w-full p-2 mb-4 border rounded" />
+        <label className="block mb-2" htmlFor="dozMiktari">
+          Kullanılan Doz Miktarını Giriniz:
+        </label>
+        <input
+          type="text"
+          className="w-full p-2 mb-4 border rounded"
+          name="dozMiktari"
+          onChange={handleChange}
+        />
 
         {/* Fenolojik Evre */}
-        <label className="block mb-2">Fenolojik Evre:</label>
+        <label className="block mb-2" htmlFor="fenolojikEvre">
+          Fenolojik Evre:
+        </label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) =>
+              handleSelectChange("fenolojikEvre", value)
+            }
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Fenolojik Evre Seçiniz" />
             </SelectTrigger>
@@ -55,7 +103,10 @@ function AgricultureObservationPage() {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded active:bg-blue-200"
+        >
           Submit
         </button>
       </form>

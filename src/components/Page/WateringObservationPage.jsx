@@ -29,6 +29,11 @@ function WateringObservationPage() {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   const renderWateringQuestion = (question, answer, dateLabel) => (
     <AccordionItem value={question}>
       <AccordionTrigger>{question}</AccordionTrigger>
@@ -146,7 +151,7 @@ function WateringObservationPage() {
       <h2 className="text-lg font-semibold mb-4">
         Sulama ve Bitki Besleme Gözlemi
       </h2>
-      <form className="flex flex-col items-start">
+      <form className="flex flex-col items-start" onSubmit={handleSubmit}>
         <Accordion type="single" collapsible className="w-full mb-4">
           {/* Bitkiye Su Verildi mi? */}
           {renderWateringQuestion(
@@ -167,7 +172,7 @@ function WateringObservationPage() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded mt-4"
+          className="bg-blue-500 text-white p-2 rounded mt-4 active:bg-blue-200"
         >
           Submit
         </button>

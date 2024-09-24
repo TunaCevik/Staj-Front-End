@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -6,21 +6,50 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 
 function WeatherObservationPage() {
+  const [formData, setFormData] = useState({
+    gunSayisi: "",
+    havaDurumu: "",
+    ruzgarTuru: "",
+    ruzgarHizi: "",
+    havaSicakligi: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Hava Gözlemi</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Gözlem için gün sayısı */}
         <label className="block mb-2">Gözlem için gün sayısı:</label>
-        <input type="text" className="w-full p-2 mb-4 border rounded" />
+        <input
+          type="number"
+          className="w-full p-2 mb-4 border rounded"
+          name="gunSayisi"
+          value={formData.gunSayisi}
+          onChange={handleInputChange}
+        />
 
         {/* Hava Durumu */}
         <label className="block mb-2">Hava Durumu:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) => handleSelectChange("havaDurumu", value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Hava Durumunu Seçiniz" />
             </SelectTrigger>
@@ -40,7 +69,9 @@ function WeatherObservationPage() {
         {/* Rüzgar Türü */}
         <label className="block mb-2">Rüzgar Türü:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) => handleSelectChange("ruzgarTuru", value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Rüzgar Türünü Seçiniz" />
             </SelectTrigger>
@@ -59,7 +90,9 @@ function WeatherObservationPage() {
         {/* Rüzgar Hızı Gözlemi */}
         <label className="block mb-2">Rüzgar Hızı Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) => handleSelectChange("ruzgarHizi", value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Rüzgar Hızını Seçiniz" />
             </SelectTrigger>
@@ -76,7 +109,11 @@ function WeatherObservationPage() {
         {/* Hava Sıcaklık Gözlemi */}
         <label className="block mb-2">Hava Sıcaklık Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) =>
+              handleSelectChange("havaSicakligi", value)
+            }
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Sıcaklığı Seçiniz" />
             </SelectTrigger>
@@ -91,9 +128,12 @@ function WeatherObservationPage() {
         </div>
 
         {/* Submit Button */}
-        <Button type="submit" variant="default">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded mt-4 active:bg-blue-200"
+        >
           Submit
-        </Button>
+        </button>
       </form>
     </div>
   );

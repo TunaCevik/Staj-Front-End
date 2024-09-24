@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -8,14 +8,38 @@ import {
 } from "@/components/ui/select";
 
 function SoilObservationPage() {
+  const [values, setValues] = useState({
+    toprakNem: "",
+    toprakNemIcerigi: "",
+    gobreKirlilik: "",
+    toprakSicaklik: "",
+    suDoygunluk: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSelectChange = (name, value) => {
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
   return (
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Toprak Gözlemi</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Toprak Nem Gözlemi */}
         <label className="block mb-2">Toprak Nem Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) => handleSelectChange("toprakNem", value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Toprak Nem Durumunu Seçiniz" />
             </SelectTrigger>
@@ -32,12 +56,21 @@ function SoilObservationPage() {
         <label className="block mb-2">
           Toprak Nem İçeriği (Volümetrik Su İçeriği):
         </label>
-        <input type="text" className="w-full p-2 mb-4 border rounded" />
+        <input
+          type="text"
+          className="w-full p-2 mb-4 border rounded"
+          name="toprakNemIcerigi"
+          onChange={handleChange}
+        />
 
         {/* Toprak Göbre Kirlilik Gözlemi */}
         <label className="block mb-2">Toprak Göbre Kirlilik Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) =>
+              handleSelectChange("gobreKirlilik", value)
+            }
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Toprak Göbre Kirlilik Durumunu Seçiniz" />
             </SelectTrigger>
@@ -53,7 +86,11 @@ function SoilObservationPage() {
         {/* Toprak Sıcaklık Gözlemi */}
         <label className="block mb-2">Toprak Sıcaklık Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) =>
+              handleSelectChange("toprakSicaklik", value)
+            }
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Toprak Sıcaklık Durumunu Seçiniz" />
             </SelectTrigger>
@@ -70,7 +107,9 @@ function SoilObservationPage() {
         {/* Toprak Su Doygunluk Gözlemi */}
         <label className="block mb-2">Toprak Su Doygunluk Gözlemi:</label>
         <div className="mb-4">
-          <Select>
+          <Select
+            onValueChange={(value) => handleSelectChange("suDoygunluk", value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Toprak Su Doygunluk Durumunu Seçiniz" />
             </SelectTrigger>
@@ -83,7 +122,10 @@ function SoilObservationPage() {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded active:bg-blue-200"
+        >
           Submit
         </button>
       </form>

@@ -178,11 +178,14 @@ function PlantObservationPage() {
       </AccordionContent>
     </AccordionItem>
   );
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
   return (
     <div className="form-container bg-white p-5 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-6">Bitki Gözlemi</h2>
-      <form className="flex flex-col items-start">
+      <form className="flex flex-col items-start" onSubmit={handleSubmit}>
         {/* Sürgün Boyu */}
         <label className="block mb-2">Sürgün Boyu (Cm):</label>
         <Input
@@ -222,9 +225,7 @@ function PlantObservationPage() {
 
         {/* Bitki Hastalık Gözlemi */}
         <div className="mb-6 w-full">
-          <label className="block mb-2 font-semibold">
-            Bitki Hastalık Gözlemi:
-          </label>
+          <label className="block mb-2 font-semibold"></label>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="disease-observation">
               <AccordionTrigger>Bitki Hastalık Gözlemi</AccordionTrigger>
@@ -285,7 +286,7 @@ function PlantObservationPage() {
         <div className="w-full">
           <Button
             type="submit"
-            className="bg-blue-500 text-white p-3 rounded-lg"
+            className="bg-blue-500 text-white p-3 rounded-lg active:bg-blue-200"
           >
             Submit
           </Button>
