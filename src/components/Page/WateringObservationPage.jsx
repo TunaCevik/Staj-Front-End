@@ -30,9 +30,25 @@ function WateringObservationPage() {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const response = await fetch("http://localhost:5000/sulama-gozlemi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Veri başarıyla gönderildi:", data);
+      } else {
+        console.error("Veri gönderme hatası:", data);
+      }
+    } catch (error) {
+      console.error("Ağ hatası:", error);
+    }
   };
 
   const renderWateringQuestion = (question, answer, dateLabel) => (

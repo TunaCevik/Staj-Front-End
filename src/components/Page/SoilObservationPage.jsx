@@ -26,9 +26,25 @@ function SoilObservationPage() {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+    try {
+      const response = await fetch("http://localhost:5000/toprak-gozlemi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Veri başarıyla gönderildi:", data);
+      } else {
+        console.error("Veri gönderme hatası:", data);
+      }
+    } catch (error) {
+      console.error("Ağ hatası:", error);
+    }
   };
 
   return (
